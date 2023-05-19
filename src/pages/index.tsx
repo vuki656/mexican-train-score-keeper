@@ -1,9 +1,9 @@
-import { Button } from '@mantine/core'
+import { Home } from '@/modules'
 
-export default function Home() {
+const HomePage = () => {
     return (
-        <Button>
-            Hi
-        </Button>
+        <Home />
     )
 }
+
+export default HomePage

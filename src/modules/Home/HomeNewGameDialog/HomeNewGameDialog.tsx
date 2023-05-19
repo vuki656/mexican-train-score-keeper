@@ -82,6 +82,7 @@ export const HomeNewGameDialog = () => {
 
         games.push({
             createdAt: new Date().toISOString(),
+            id: nanoid(),
             players: formValue.players,
         })
 

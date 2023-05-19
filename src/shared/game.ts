@@ -2,8 +2,8 @@ import { showNotification } from '@mantine/notifications'
 
 import { GAMES_KEY } from './constants'
 
+import type { GameType } from '@/modules'
 import { gamesValidation } from '@/modules'
-import type { GameType } from '@/modules/Home/HomeNewGameDialog'
 
 export const getGames = () => {
     return gamesValidation.parse(

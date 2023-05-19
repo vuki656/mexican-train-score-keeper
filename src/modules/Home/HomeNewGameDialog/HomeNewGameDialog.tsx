@@ -14,7 +14,11 @@ import {
     useForm,
 } from 'react-hook-form'
 
-import type { NewGameFormValue } from './HomeNewGameDialog.types'
+import type {
+    NewGameFormValue,
+    PlayerType,
+} from './HomeNewGameDialog.types'
+import { generatePlayerRounds } from './HomeNewGameDialog.utils'
 import { newGameValidation } from './HomeNewGameDialog.validation'
 
 import { ICON_SIZE } from '@/shared/constants'
@@ -26,11 +30,12 @@ const DEFAULT_PLAYER_COUNT = 4
 export const HomeNewGameDialog = () => {
     const [isOpen, { close, open }] = useDisclosure()
 
-    const startingPlayers = useMemo(() => {
+    const startingPlayers: PlayerType[] = useMemo(() => {
         return [...new Array(DEFAULT_PLAYER_COUNT)].map(() => {
             return {
                 id: nanoid(),
                 name: '',
+                rounds: generatePlayerRounds(),
             }
         })
     }, [])
@@ -60,6 +65,7 @@ export const HomeNewGameDialog = () => {
         append({
             id: nanoid(),
             name: '',
+            rounds: generatePlayerRounds(),
         })
     }
 

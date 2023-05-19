@@ -14,6 +14,7 @@ import {
 import type { GameType } from './HomeNewGameDialog'
 import { HomeNewGameDialog } from './HomeNewGameDialog'
 
+import { DATE_FORMAT } from '@/shared/constants'
 import { getGames } from '@/shared/game'
 
 export const Home = () => {
@@ -43,7 +44,7 @@ export const Home = () => {
                         }}
                     >
                         <Text>
-                            {dayjs(game.createdAt).format('DD/MM/YYYY HH:mm')}
+                            {dayjs(game.createdAt).format(DATE_FORMAT)}
                         </Text>
                     </Paper>
                 )

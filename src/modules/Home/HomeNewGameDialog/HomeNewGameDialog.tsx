@@ -94,7 +94,10 @@ export const HomeNewGameDialog = () => {
 
     return (
         <>
-            <Button onClick={open}>
+            <Button 
+                onClick={open} 
+                fullWidth={true}
+            >
                 New Game
             </Button>
             <Modal

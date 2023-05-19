@@ -14,15 +14,11 @@ import {
     useForm,
 } from 'react-hook-form'
 
-import { GAMES_KEY } from '../Home.constants'
-
 import type { NewGameFormValue } from './HomeNewGameDialog.types'
-import {
-    gamesValidation,
-    newGameValidation,
-} from './HomeNewGameDialog.validation'
+import { newGameValidation } from './HomeNewGameDialog.validation'
 
 import { ICON_SIZE } from '@/shared/constants'
+import { addGame } from '@/shared/game'
 import { extractFormFieldErrors } from '@/shared/utils'
 
 const DEFAULT_PLAYER_COUNT = 4
@@ -70,32 +66,23 @@ export const HomeNewGameDialog = () => {
     const onPlayerRemove = (index: number) => {
         return () => {
             remove(index)
+
+            close()
         }
     }
 
     const onSubmit = (formValue: NewGameFormValue) => {
-        const games = gamesValidation.parse(
-            JSON.parse(
-                localStorage.getItem(GAMES_KEY) ?? '[]'
-            )
-        )
-
-        games.push({
+        addGame({
             createdAt: new Date().toISOString(),
             id: nanoid(),
             players: formValue.players,
         })
-
-        localStorage.setItem(
-            GAMES_KEY,
-            JSON.stringify(games)
-        )
     }
 
     return (
         <>
-            <Button 
-                onClick={open} 
+            <Button
+                onClick={open}
                 fullWidth={true}
             >
                 New Game

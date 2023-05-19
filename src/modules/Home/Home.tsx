@@ -11,10 +11,10 @@ import {
     useState,
 } from 'react'
 
-import { GAMES_KEY } from './Home.constants'
 import type { GameType } from './HomeNewGameDialog'
 import { HomeNewGameDialog } from './HomeNewGameDialog'
-import { gamesValidation } from './HomeNewGameDialog/HomeNewGameDialog.validation'
+
+import { getGames } from '@/shared/game'
 
 export const Home = () => {
     const router = useRouter()
@@ -22,13 +22,7 @@ export const Home = () => {
     const [games, setGames] = useState<GameType[]>([])
 
     useEffect(() => {
-        const games = gamesValidation.parse(
-            JSON.parse(
-                localStorage.getItem(GAMES_KEY) ?? '[]'
-            )
-        )
-
-        setGames(games)
+        setGames(getGames())
     })
 
     return (
@@ -40,6 +34,7 @@ export const Home = () => {
             {games.map((game) => {
                 return (
                     <Paper
+                        key={game.id}
                         id={game.id}
                         withBorder={true}
                         p={10}

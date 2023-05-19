@@ -1,14 +1,8 @@
 import { z } from 'zod'
 
-const NANOID_MIN_LENGTH = 21
-const NANOID_MAX_LENGTH = 36
+import { nanoidValidation } from '@/shared/validation'
 
-const nanoidValidation = z
-    .string()
-    .min(NANOID_MIN_LENGTH)
-    .max(NANOID_MAX_LENGTH)
-
-const playerValidation = z.object({
+export const playerValidation = z.object({
     id: nanoidValidation,
     name: z
         .string()
@@ -19,10 +13,3 @@ export const newGameValidation = z.object({
     players: z.array(playerValidation),
 })
 
-export const gameValidation = z.object({
-    createdAt: z.string(),
-    id: nanoidValidation,
-    players: z.array(playerValidation),
-})
-
-export const gamesValidation = z.array(gameValidation)

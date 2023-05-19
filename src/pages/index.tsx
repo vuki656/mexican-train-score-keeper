@@ -1,7 +1,9 @@
+import { Button } from '@mantine/core'
+
 export default function Home() {
     return (
-        <p>
-            hi
-        </p>
+        <Button>
+            Hi
+        </Button>
     )
 }

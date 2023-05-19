@@ -19,7 +19,7 @@ export const newGameValidation = z.object({
     players: z.array(playerValidation),
 })
 
-const gameValidation = z.object({
+export const gameValidation = z.object({
     createdAt: z.string(),
     id: nanoidValidation,
     players: z.array(playerValidation),

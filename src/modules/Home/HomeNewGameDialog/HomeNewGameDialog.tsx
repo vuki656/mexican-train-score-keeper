@@ -72,8 +72,6 @@ export const HomeNewGameDialog = () => {
     const onPlayerRemove = (index: number) => {
         return () => {
             remove(index)
-
-            close()
         }
     }
 
@@ -83,6 +81,8 @@ export const HomeNewGameDialog = () => {
             id: nanoid(),
             players: formValue.players,
         })
+
+        close()
     }
 
     return (

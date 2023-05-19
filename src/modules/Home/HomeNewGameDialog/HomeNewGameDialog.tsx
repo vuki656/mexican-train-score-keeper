@@ -14,8 +14,13 @@ import {
     useForm,
 } from 'react-hook-form'
 
+import { GAMES_KEY } from '../Home.constants'
+
 import type { NewGameFormValue } from './HomeNewGameDialog.types'
-import { newGameValidation } from './HomeNewGameDialog.validation'
+import {
+    gamesValidation,
+    newGameValidation,
+} from './HomeNewGameDialog.validation'
 
 import { ICON_SIZE } from '@/shared/constants'
 import { extractFormFieldErrors } from '@/shared/utils'
@@ -69,7 +74,21 @@ export const HomeNewGameDialog = () => {
     }
 
     const onSubmit = (formValue: NewGameFormValue) => {
-        console.log(formValue)
+        const games = gamesValidation.parse(
+            JSON.parse(
+                localStorage.getItem(GAMES_KEY) ?? '[]'
+            )
+        )
+
+        games.push({
+            createdAt: new Date().toISOString(),
+            players: formValue.players,
+        })
+
+        localStorage.setItem(
+            GAMES_KEY,
+            JSON.stringify(games)
+        )
     }
 
     return (

@@ -11,7 +11,7 @@ import {
     useState,
 } from 'react'
 
-import type { GameType } from './HomeNewGameDialog'
+import type { GameType } from './Home.types'
 import { HomeNewGameDialog } from './HomeNewGameDialog'
 
 import { DATE_FORMAT } from '@/shared/constants'
@@ -24,7 +24,19 @@ export const Home = () => {
 
     useEffect(() => {
         setGames(getGames())
-    })
+    }, [])
+
+    const onGameClick = (gameId: string) => {
+        return () => {
+            void router.push({
+                pathname: '/game/[gameId]',
+                query: {
+                    gameId,
+                    roundNumber: 1,
+                },
+            })
+        }
+    }
 
     return (
         <Stack p={10}>
@@ -39,9 +51,7 @@ export const Home = () => {
                         id={game.id}
                         withBorder={true}
                         p={10}
-                        onClick={() => {
-                            void router.push(`/game/${game.id}`)
-                        }}
+                        onClick={onGameClick(game.id)}
                     >
                         <Text>
                             {dayjs(game.createdAt).format(DATE_FORMAT)}

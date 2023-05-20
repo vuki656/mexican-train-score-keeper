@@ -1,4 +1,5 @@
 import {
+    Pagination,
     Paper,
     Stack,
     Text,
@@ -13,7 +14,10 @@ import {
 
 import type { GameType } from '../Home/Home.types'
 
-import { DATE_FORMAT } from '@/shared/constants'
+import {
+    DATE_FORMAT,
+    ROUND_AMOUNT,
+} from '@/shared/constants'
 import { getGame } from '@/shared/game'
 
 export const Game = () => {
@@ -27,6 +31,22 @@ export const Game = () => {
         setGame(foundGame)
     }, [])
 
+    const onRoundChange = (roundNumber: number) => {
+        void router.push(
+            {
+                pathname: '/game/[gameId]',
+                query: {
+                    gameId: game?.id,
+                    roundNumber,
+                },
+            },
+            undefined,
+            {
+                shallow: true,
+            }
+        )
+    }
+
     return (
         <Stack p={10}>
             <Title
@@ -35,6 +55,11 @@ export const Game = () => {
             >
                 {dayjs(game?.createdAt).format(DATE_FORMAT)}
             </Title>
+            <Pagination
+                total={ROUND_AMOUNT}
+                value={Number(router.query.roundNumber ?? 0)}
+                onChange={onRoundChange}
+            />
             {game?.players.map((player) => {
                 return (
                     <Paper

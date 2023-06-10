@@ -4,7 +4,7 @@ export const generatePlayerRounds = () => {
     return [...new Array(ROUND_AMOUNT)].map((_, index) => {
         return {
             points: 0,
-            roundNumber: index + 1,
+            number: index + 1,
         }
     })
 }

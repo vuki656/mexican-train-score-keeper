@@ -7,7 +7,7 @@ const roundValidation = z.object({
     points: z
         .number()
         .nonnegative(),
-    roundNumber: z
+    number: z
         .number()
         .nonnegative()
         .max(ROUND_AMOUNT),

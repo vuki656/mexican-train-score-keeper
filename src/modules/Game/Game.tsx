@@ -61,6 +61,14 @@ export const Game = () => {
                 onChange={onRoundChange}
             />
             {game?.players.map((player) => {
+                const { points } = player.rounds.find((round) => {
+                    return round.number === Number(router.query.roundNumber)
+                }) ?? {}
+
+                const totalScore = player.rounds.reduce((accumulator, { points }) => {
+                    return accumulator + points
+                }, 0)
+
                 return (
                     <Paper
                         key={player.id}
@@ -72,12 +80,29 @@ export const Game = () => {
                             justifyContent: 'center',
                         }}
                     >
-                        <Text
-                            size={30}
-                            weight="bold"
-                        >
-                            {player.name}
-                        </Text>
+                        <Stack>
+                            <Text
+                                size={30}
+                                weight="bold"
+                                align='center'
+                            >
+                                {player.name}
+                            </Text>
+                            <Text
+                                size={30}
+                                weight="bold"
+                                align='center'
+                            >
+                                Round Score: {points}
+                            </Text>
+                            <Text
+                                size={30}
+                                weight="bold"
+                                align='center'
+                            >
+                                Total Score: {totalScore}
+                            </Text>
+                        </Stack>
                     </Paper>
                 )
             })}

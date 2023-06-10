@@ -1,0 +1,1 @@
+- [ ] Sync score/points across the app

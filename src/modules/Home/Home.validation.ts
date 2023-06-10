@@ -1,8 +1,9 @@
 import { z } from 'zod'
 
-import { playerValidation } from './HomeNewGameDialog'
-
-import { nanoidValidation } from '@/shared/validation'
+import {
+    nanoidValidation,
+    playerValidation
+} from '@/shared/validation'
 
 export const gameValidation = z.object({
     createdAt: z.string(),

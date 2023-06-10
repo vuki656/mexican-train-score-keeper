@@ -16,7 +16,6 @@ import {
 
 import type {
     NewGameFormValue,
-    PlayerType,
 } from './HomeNewGameDialog.types'
 import { generatePlayerRounds } from './HomeNewGameDialog.utils'
 import { newGameValidation } from './HomeNewGameDialog.validation'
@@ -24,6 +23,7 @@ import { newGameValidation } from './HomeNewGameDialog.validation'
 import { ICON_SIZE } from '@/shared/constants'
 import { addGame } from '@/shared/game'
 import { extractFormFieldErrors } from '@/shared/utils'
+import { PlayerType } from '@/shared/types'
 
 const DEFAULT_PLAYER_COUNT = 4
 
